@@ -1,0 +1,76 @@
+#!/bin/bash 
+EDITOR=nano
+if [ $1 == "-t" ]
+then
+    echo -e "\033[1;36mYou are in testing mode... " 
+    read -e -p "Type in the directory of samples: " SAMPLE
+    read -e -p "Type in program name: " PROGRAM
+    PROG=$(realpath $PROGRAM)
+    echo -e "\033[0mI am testing program $PROG..."
+    for IN_FILE in $(pwd)/$SAMPLE*_in.txt ; do
+        REF_FILE=`echo -n $IN_FILE | sed -e 's/_in\(.*\)$/_out\1/'`
+        $PROG < $IN_FILE > my_out.txt 
+        if [ $? -ne 0 ]; then  
+            echo -e "\033[1;31mNo such file or directory!\033[0m";
+            exit
+        fi
+        if ! diff $REF_FILE my_out.txt ; then
+            echo -e "\033[1;31mFail: $IN_FILE\033[0m";
+            exit
+        else
+            echo -e "\033[1;32mOK: $IN_FILE\033[0m";
+            rm -r -f my_out.txt
+        fi
+    done
+    echo -e "\033[1;32mAll tests OK :)\033[0m"
+fi
+
+if [ $1 == "-c" ]
+then
+    read -e -p "Type in the directory of samples: " SAMPLE
+    cd $(pwd)/$SAMPLE
+    BFile=$( ls -1r | head -n 1)
+    BFile=${BFile:0:4}
+    while [ 1 == 1 ]
+    do 
+        read -p "Do you want to create new dataset? (y/n) " BUFF
+        if [ $BUFF == "y" ]
+        then 
+            BFile=$((10#$BFile + 1))
+            BFile=$(printf %04d $BFile)
+            touch $BFile"_in.txt"
+            $EDITOR $BFile"_in.txt"
+            touch $BFile"_out.txt"
+            $EDITOR $BFile"_out.txt"
+            echo -e "\033[1;32mSuccessfully created! \033[0m"
+        else
+            exit
+        fi
+    done
+fi
+
+if [ $1 == "-r" ]
+then
+    read -e -p "Type in the directory of samples: " SAMPLE
+    cd $(pwd)/$SAMPLE
+    while [ 1 == 1 ]
+    do 
+        read -p "Do you want to remove dataset? (y/n) " BUFF
+        if [ $BUFF == "y" ]
+        then 
+            printf "%s   %s   %s   %s\n" $(ls -h) 
+            read -e -p "Type in dataset number you want to remove: " BFile
+            BFile=$(printf %04d $BFile)
+            rm $BFile"_in.txt" ;
+            rm $BFile"_out.txt" ;
+            if [ $? -ne 0 ]; then  
+                echo -e "\033[1;31mNo such file or directory!\033[0m";
+            else
+                echo -e "\033[1;32mSuccessfully removed! \033[0m"
+            fi     
+        else
+            exit
+        fi
+    done
+fi
+
