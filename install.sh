@@ -13,7 +13,7 @@ then
             read -p "Type in editor you would like to use for creating datasets. (such as vim/nano) " EDITOR
 
             ISEDITOR=$(ls /usr/bin | grep $EDITOR)
-            if [ -z $ISEDITOR ]
+            if [ -z "$ISEDITOR" ]
             then
                 echo -e "\033[1;31mThere is no such an editor installed!\033[0m"
             else
