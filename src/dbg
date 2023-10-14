@@ -3,8 +3,42 @@ EDITOR=$(cat $HOME/.dbguserconf)
 if [ $1 == "-t" ]
 then
     echo -e "\033[1;36mYou are in testing mode... " 
-    read -e -p "Type in the directory of samples: " SAMPLE
-    read -e -p "Type in program name: " PROGRAM
+    CONFIG=$(ls -a | grep .dbgconf)
+    if [ -z "$CONFIG" ]
+    then
+        echo "Config file does not EXIST"
+        CREATE=1
+    else
+        if [ -z $2 ]
+        then
+            echo "Config file found... overwrite using '-t o' " 
+            CREATE=0
+        else
+            if [ $2 == "o" ]
+            then
+                echo "Config file found... overwriting"
+                CREATE=1
+            fi
+        fi        
+    fi
+    
+    if [ $CREATE == 1 ]
+    then
+        read -e -p "Type in the directory of samples: " SAMPLE
+        read -e -p "Type in program name: " PROGRAM
+        read -p "Do you want to create config file? (y/n)" BUFF
+        if [ $BUFF == "y" ]
+        then
+            touch .dbgconf
+            echo "$SAMPLE" > .dbgconf
+            echo "$PROGRAM" >> .dbgconf
+            echo -e "\033[1;32mConfig file updated!\033[0m"
+        fi
+    else
+        SAMPLE=$(head -1 .dbgconf)
+        PROGRAM=$(head -2 dbg.config | tail -1)
+    fi
+
     PROG=$(realpath $PROGRAM)
     echo -e "\033[0mI am testing program $PROG..."
     for IN_FILE in $(pwd)/$SAMPLE*_in.txt ; do
