@@ -1,5 +1,5 @@
 #!/bin/bash 
-EDITOR=nano
+EDITOR=$(cat $HOME/.dbguserconf)
 if [ $1 == "-t" ]
 then
     echo -e "\033[1;36mYou are in testing mode... " 
@@ -23,6 +23,7 @@ then
         fi
     done
     echo -e "\033[1;32mAll tests OK :)\033[0m"
+    exit
 fi
 
 if [ $1 == "-c" ]
@@ -47,6 +48,7 @@ then
             exit
         fi
     done
+    exit
 fi
 
 if [ $1 == "-r" ]
@@ -72,5 +74,22 @@ then
             exit
         fi
     done
+    exit
 fi
 
+if [ $1 == "-v" ]
+then
+    echo "Version info v0.0"
+    echo "git clone https://github.com/bortkoP/easy-progtest-dbg.git"
+    echo "by bortkoP 14.10.2023"
+fi
+
+echo "Usage of Easy progtest debuger:"
+echo " -t : for testing, you can create your own config to get rid of,"
+echo "   typing samples, directory and program name"
+echo " -c : to create new datasets"
+echo " -r : to remove datasets"
+echo " -v : to display version"
+echo " -h : to display this help"
+echo "If you find any issues feel free to contact me pipo.bortko@gmail.com"
+echo "You can also help me developing this project"
