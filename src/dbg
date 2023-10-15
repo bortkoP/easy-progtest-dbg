@@ -1,5 +1,5 @@
 #!/bin/bash 
-EDITOR=$(cat $HOME/.dbguserconf)
+EDITOR=$(cat /home/$(logname)/.dbguserconf)
 if [ -n "$1" ]
 then
     if [ $1 == "-t" ]
@@ -120,6 +120,7 @@ then
         echo "by bortkoP 14.10.2023"
     fi
 else
+    echo ""
     echo "Usage of Easy progtest debuger:"
     echo " -t : for testing, you can create your own config to get rid of,"
     echo "   typing samples, directory and program name"
@@ -129,4 +130,5 @@ else
     echo " -h : to display this help"
     echo "If you find any issues feel free to contact me pipo.bortko@gmail.com"
     echo "You can also help me developing this project"
+    echo ""
 fi
