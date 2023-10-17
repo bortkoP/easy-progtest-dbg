@@ -38,7 +38,7 @@ then
             fi
         else
             SAMPLE=$(head -1 .dbgconf)
-            PROGRAM=$(head -2 dbg.config | tail -1)
+            PROGRAM=$(head -2 .dbgconf | tail -1)
         fi
 
         PROG=$(realpath $PROGRAM)
