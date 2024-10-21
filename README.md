@@ -40,7 +40,7 @@ Now you have uninstalled it!
 Go to directory where your main is, it is not necessary but it is recommanded, run the program with <br/>
 > dbg -t <br />
 
-This will test your program with sample data, which you have downloaded from progtest, you have to type in the direcoty where samples are and than where your program binary is. <br/>
+This will test your program with sample data, which you have downloaded from progtest, you have to type in the directory where samples are and than where your program binary is. <br/>
 When you are done, dbg will check it! <br/>
   ### Creating datasets <br />
 > dbg -c <br />
@@ -48,7 +48,7 @@ When you are done, dbg will check it! <br/>
 This will start creating datasets with higher numbers, for example, if your dataset number was 0001, it will create 0002, <br/>
 next it will open editor which you have specified and is located in /home/user/.dbguserconf, you can change it anytime, <br/>
 but make sure that editor that you typed in exist! <br/>
-Next you type in _in data and then close editor _out data file will automaticly be created, you can type them in too. <br/>
+Next you type in _in data and then close editor _out data file will automatically be created, you can type them in too. <br/>
 If everything is OK, you can exit or start over again and create another dataset. <br/>
   ### Removing datasets <br />
 > dbg -r <br />
