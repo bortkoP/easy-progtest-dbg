@@ -119,16 +119,22 @@ then
         echo "git clone https://github.com/bortkoP/easy-progtest-dbg.git"
         echo "by bortkoP 14.10.2023"
     fi
+    if [ $1 == "-h" ]
+    then
+        echo ""
+        echo "Usage of Easy progtest debuger:"
+        echo " -t : for testing, you can create your own config to get rid of,"
+        echo "   typing samples, directory and program name"
+        echo " -c : to create new datasets"
+        echo " -r : to remove datasets"
+        echo " -v : to display version"
+        echo " -h : to display this help"
+        echo "If you find any issues feel free to contact me pipo.bortko@gmail.com"
+        echo "You can also help me developing this project"
+        echo ""
+    fi
 else
     echo ""
-    echo "Usage of Easy progtest debuger:"
-    echo " -t : for testing, you can create your own config to get rid of,"
-    echo "   typing samples, directory and program name"
-    echo " -c : to create new datasets"
-    echo " -r : to remove datasets"
-    echo " -v : to display version"
-    echo " -h : to display this help"
-    echo "If you find any issues feel free to contact me pipo.bortko@gmail.com"
-    echo "You can also help me developing this project"
+    echo "Try help (dbg -h)"
     echo ""
 fi
